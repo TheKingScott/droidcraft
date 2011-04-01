@@ -20,6 +20,7 @@ import com.droidcraft.map.control.MapPanning;
 import com.droidcraft.map.control.MotionForwarder;
 import com.droidcraft.map.control.MultitouchController;
 import com.droidcraft.map.control.TouchDistributor;
+import com.droidcraft.tmx.control.TmxUtilities;
 
 import android.os.Build;
 import android.view.Display;
@@ -53,8 +54,8 @@ public class DroidCraft extends BaseGameActivity {
 	@Override
 	public void onLoadResources() {
 		this.mTexture = new Texture(64, 64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		TextureRegionFactory.setAssetBasePath("gfx/");
-		this.mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(this.mTexture, this, "face_box.png", 0, 0);
+		//TextureRegionFactory.setAssetBasePath("gfx/");
+		this.mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(this.mTexture, this, "gfx/face_box.png", 0, 0);
 		this.mEngine.getTextureManager().loadTexture(this.mTexture);
 	}
 
@@ -66,6 +67,7 @@ public class DroidCraft extends BaseGameActivity {
 		initMultiTouch(scene);
 		final Sprite box = new Sprite(CAMERA_HEIGHT/2,CAMERA_WIDTH/2, this.mBoxFaceTextureRegion);
 		scene.getLastChild().attachChild(box);
+		scene.getFirstChild().attachChild(TmxUtilities.createTmxMap(this, this.mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA, "tmx/desert.tmx"));
 		return scene;
 	}
 	
