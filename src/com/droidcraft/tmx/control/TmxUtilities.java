@@ -48,7 +48,7 @@ public class TmxUtilities{
 			} catch (final TMXLoadException tmxle) {
 				Debug.e(tmxle);
 			}
-			pScene.getFirstChild().attachChild(mTMXTiledMap.getTMXLayers().get(0));
+			pScene.getFirstChild().attachChild(getTmxLayer(0));
 			pScene.registerUpdateHandler(new IUpdateHandler(){
 				@Override
 				public void reset() { }
@@ -73,6 +73,18 @@ public class TmxUtilities{
 	}
 	public static TMXLoader getTmxLoader(){
 		return mTMXLoader;
+			
+	}
+	public static TMXLayer getTmxLayer(int pLayer){
+		return mTMXTiledMap.getTMXLayers().get(pLayer);
+			
+	}
+	public static float getTmxLayerWidth(int pLayer){
+		return mTMXTiledMap.getTMXLayers().get(pLayer).getWidth();
+			
+	}
+	public static float getTmxLayerHeight(int pLayer){
+		return mTMXTiledMap.getTMXLayers().get(pLayer).getHeight();
 			
 	}
 };	
