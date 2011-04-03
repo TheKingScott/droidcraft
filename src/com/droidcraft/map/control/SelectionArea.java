@@ -32,12 +32,13 @@ public class SelectionArea implements IOnSceneTouchListener {
 	public SelectionArea(Scene pScene) {
 		this.scene = pScene;
 		this.selectionRectangle = new Rectangle(0, 0, 0, 0);		
-		this.selectionRectangle.setColor(1.0f, 0.f, 0.f, 0.3f);
+		this.selectionRectangle.setColor(1.0f, 0.980392f, 0.980392f, 0.2f);
 		this.selectionRectangle.setVisible(true);
 		this.scene.getLastChild().attachChild(selectionRectangle);
 		for(int i=0; i <lines.length; i++){
 			lines[i] = new Line(0,0,0,0,2);
 			this.scene.getLastChild().attachChild(lines[i]);
+			lines[i].setColor(0f, 1f ,0f);
 		}
 	}
 
@@ -139,8 +140,7 @@ public class SelectionArea implements IOnSceneTouchListener {
 			for(int i=0; i < lines.length; i++){
 				lines[i].setVisible(false);
 				lines[i].setPosition(0,0,0,0);
-				Log.d("Position","Position: " + lines[i].getX1() + ", " + lines[i].getX2() + "," + lines[i].getY1() + ", " + lines[i].getY2());
-			}
+				}
 		}
 		this.selection = false;
 	}

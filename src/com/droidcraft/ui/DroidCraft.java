@@ -5,7 +5,6 @@ import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.Sprite;
@@ -33,13 +32,14 @@ import android.view.GestureDetector;
  * @author Frank Blandon
  * @author Ettienne
  */
-public class DroidCraft extends BaseGameActivity {
+public class DroidCraft extends BaseGameActivity{
 
 	private static int CAMERA_HEIGHT;
 	private static int CAMERA_WIDTH;
 	private ZoomCamera mZoomCamera;
 	private Texture mTexture;
 	private TextureRegion mBoxFaceTextureRegion;
+
 	
 	@Override
 	public void onLoadComplete() {
@@ -77,8 +77,11 @@ public class DroidCraft extends BaseGameActivity {
 		this.mZoomCamera.setBounds(0, TmxUtilities.getTmxLayerWidth(0), 0, TmxUtilities.getTmxLayerHeight(0));
 		this.mZoomCamera.setBoundsEnabled(true);
 		
+		
 		return scene;
 	}
+
+
 	
 	/**
 	 * Initializes all the multi-touch functionalities in the phone
