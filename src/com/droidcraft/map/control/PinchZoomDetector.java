@@ -9,7 +9,7 @@ import android.view.MotionEvent;
  
 /**
  * PinchZoomDetector is only usable on multitouch-enalbed versions (2.1+)
- * @author Frank
+ * @author Frank Blandon
  * @author BrR
  */
 public class PinchZoomDetector implements IOnSceneTouchListener
@@ -62,7 +62,7 @@ public class PinchZoomDetector implements IOnSceneTouchListener
                 	if(zoomFactor > 1)
                     {
                 		zoomFactor = 1;
-                        this.cam.setZoomFactor(1);
+                        this.cam.setZoomFactor(zoomFactor);
                     }
                     if(zoomFactor < .2f)
                     {

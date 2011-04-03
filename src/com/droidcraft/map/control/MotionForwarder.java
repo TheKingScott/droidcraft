@@ -11,7 +11,7 @@ import android.view.GestureDetector;
  * to detect a gesture and forwards
  * the gesture
  * 
- * @author Frank
+ * @author Frank Blandon
  * @author Br
  */
 public class MotionForwarder implements IOnSceneTouchListener {

@@ -4,18 +4,20 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 /**
  * This class uses Android gestures to move the map around
- * @author Frank
+ * @author Frank Blandon
  * @author Br
  *
  */
-public class MapFlinger extends SimpleOnGestureListener {
+public class MapGestureDetector extends SimpleOnGestureListener {
 
 	private MapPanning mapPanning;
+	private SelectionArea selectionArea;
 
 	
 	
-	public MapFlinger (MapPanning mapPanning){
+	public MapGestureDetector (MapPanning mapPanning,SelectionArea selectionArea){
 		this.mapPanning = mapPanning;
+		this.selectionArea = selectionArea;
 		
 	}
 	
@@ -26,4 +28,11 @@ public class MapFlinger extends SimpleOnGestureListener {
 		return true;	
 			
 	}
+	
+	@Override
+	  public boolean onDoubleTap(MotionEvent e) {
+	    this.mapPanning.cancelCurScrolling();
+	    this.selectionArea.startSelection();	    
+	    return true;
+	  }
 }

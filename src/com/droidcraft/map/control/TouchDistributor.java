@@ -8,7 +8,7 @@ import org.anddev.andengine.input.touch.TouchEvent;
 
 /**
  * This takes care of storing every type touch on the scene.
- * @author Frank
+ * @author Frank Blandon
  *
  */
 public class TouchDistributor implements Scene.IOnSceneTouchListener {
