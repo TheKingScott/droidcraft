@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="64" height="64" tilewidth="40" tileheight="40">
- <tileset firstgid="1" name="GRS2ROC2" tilewidth="40" tileheight="40" spacing="1" margin="1">
+ <tileset firstgid="1" name="GRS2ROC2" tilewidth="40" tileheight="40" spacing="3" margin="2">
   <image source="gfx/GRS2ROC2.png" width="206" height="124"/>
  </tileset>
  <layer name="Tile Layer 1" width="64" height="64">
