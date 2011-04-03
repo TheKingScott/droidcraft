@@ -73,7 +73,6 @@ public class DroidCraft extends BaseGameActivity {
 		initMultiTouch(scene);
 		final Sprite box = new Sprite(CAMERA_HEIGHT/2,CAMERA_WIDTH/2, this.mBoxFaceTextureRegion);
 		scene.getLastChild().attachChild(box);
-		//Temporary until we can call this from the TmxUtilities class:
 		TmxUtilities.createTmxMap(this, this.mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA, scene, "tmx/desert.tmx");
 		this.mZoomCamera.setBounds(0, TmxUtilities.getTmxLayerWidth(0), 0, TmxUtilities.getTmxLayerHeight(0));
 		this.mZoomCamera.setBoundsEnabled(true);
