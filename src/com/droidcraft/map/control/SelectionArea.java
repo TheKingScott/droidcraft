@@ -1,10 +1,12 @@
 package com.droidcraft.map.control;
 
+import org.anddev.andengine.entity.primitive.Line;
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.input.touch.TouchEvent;
 
+import android.util.Log;
 import android.view.MotionEvent;
 
 /**
@@ -20,13 +22,23 @@ public class SelectionArea implements IOnSceneTouchListener {
 	private Rectangle selectionRectangle;
 	private boolean selection = false;
 	private Scene scene;
+	Line lines[] = new Line[4];
+	private float fHeight;
+	private float fWidth;
+	private float fTouchX;
+	private float fTouchY;
+	
 
 	public SelectionArea(Scene pScene) {
 		this.scene = pScene;
-		this.selectionRectangle = new Rectangle(0, 0, 0, 0);
+		this.selectionRectangle = new Rectangle(0, 0, 0, 0);		
 		this.selectionRectangle.setColor(1.0f, 0.f, 0.f, 0.3f);
 		this.selectionRectangle.setVisible(true);
 		this.scene.getLastChild().attachChild(selectionRectangle);
+		for(int i=0; i <lines.length; i++){
+			lines[i] = new Line(0,0,0,0,2);
+			this.scene.getLastChild().attachChild(lines[i]);
+		}
 	}
 
 	@Override
@@ -58,37 +70,37 @@ public class SelectionArea implements IOnSceneTouchListener {
 
 	protected void selectRectangleActionMove(TouchEvent pSceneTouchEvent) {
 
-		final float fWidth = Math
+		this.fWidth = Math
 				.abs(pSceneTouchEvent.getX() - this.selectionX);
-		final float fHeight = Math.abs(pSceneTouchEvent.getY()
+		this.fHeight = Math.abs(pSceneTouchEvent.getY()
 				- this.selectionY);
-		final float fTouchX = pSceneTouchEvent.getX();
-		final float fTouchY = pSceneTouchEvent.getY();
+		this.fTouchX = pSceneTouchEvent.getX();
+		this.fTouchY = pSceneTouchEvent.getY();
 
-		if (fTouchX > this.selectionX && fTouchY < this.selectionY) {
+		if (this.fTouchX > this.selectionX && this.fTouchY < this.selectionY) {
 			  /*     _______
              *      |       |
              *      |       |
              *      X_______|
              */
 			this.selectionRectangle.setPosition(this.selectionX,
-					this.selectionY - fHeight);
-		} else if (fTouchX < this.selectionX && fTouchY > this.selectionY) {
+					this.selectionY - this.fHeight);
+		} else if (this.fTouchX < this.selectionX && this.fTouchY > this.selectionY) {
 			/*       _______
              *      |       X
              *      |       |
              *      |_______|
              */
-			this.selectionRectangle.setPosition(this.selectionX - fWidth,
+			this.selectionRectangle.setPosition(this.selectionX - this.fWidth,
 					this.selectionY);
-		} else if (fTouchX < this.selectionX && fTouchY < this.selectionY) {
+		} else if (this.fTouchX < this.selectionX && this.fTouchY < this.selectionY) {
 			/*       _______
              *      |       |
              *      |       |
              *      |_______X
              */
-			this.selectionRectangle.setPosition(this.selectionX - fWidth,
-					this.selectionY - fHeight);
+			this.selectionRectangle.setPosition(this.selectionX - this.fWidth,
+					this.selectionY - this.fHeight);
 		} else {
 			 /*      _______
              *      X       |
@@ -101,6 +113,18 @@ public class SelectionArea implements IOnSceneTouchListener {
 		this.selectionRectangle.setWidth(fWidth);
 		this.selectionRectangle.setHeight(fHeight);
 		this.selectionRectangle.setVisible(true);
+		
+		this.fHeight = fTouchY - this.selectionY;
+		this.fWidth = fTouchX - this.selectionX;
+		
+		//Add border to the rectangle
+		lines[0].setPosition(this.selectionX, this.selectionY, this.fTouchX, this.selectionY);
+		lines[1].setPosition(this.selectionX, this.selectionY, this.selectionX, this.selectionY + this.fHeight);
+		lines[2].setPosition(this.fTouchX, this.selectionY, fTouchX, this.selectionY + this.fHeight);
+		lines[3].setPosition(this.selectionX, this.selectionY + this.fHeight, this.selectionX + this.fWidth, this.selectionY + this.fHeight);
+		
+		for(int i=0; i < lines.length; i++)
+			lines[i].setVisible(true);
 	}
 
 	protected void selectRectangleActionUp(TouchEvent pSceneTouchEvent) {
@@ -109,10 +133,14 @@ public class SelectionArea implements IOnSceneTouchListener {
 		if (this.selectionRectangle.isVisible()) {
 
 			// set rectangle invisible
-			this.selectionRectangle.setVisible(false);
 			this.selectionRectangle.setPosition(0.f, 0.f);
 			this.selectionRectangle.setWidth(0.f);
 			this.selectionRectangle.setHeight(0.f);
+			for(int i=0; i < lines.length; i++){
+				lines[i].setVisible(false);
+				lines[i].setPosition(0,0,0,0);
+				Log.d("Position","Position: " + lines[i].getX1() + ", " + lines[i].getX2() + "," + lines[i].getY1() + ", " + lines[i].getY2());
+			}
 		}
 		this.selection = false;
 	}
