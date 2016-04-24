@@ -1,0 +1,1 @@
+A open learning project attempting to make a age of empires like game on the android platform using the open-source android game engine Andengine.
